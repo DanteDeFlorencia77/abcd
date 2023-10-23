@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+      body {
+        text-align: center;
+      }
+
+      #alphabet-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .letter {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: .3125rem;
+        font-size: 2rem;
+        transition: background-color 0.3s; /* Agregamos una transición de 0.3 segundos para el color de fondo */
+      }
+
+      .letter.active {
+        background-color: #FFC800; /* Cambiamos el color de fondo cuando está activo */
+      }
+
+      #content-display {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      #related-words-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 40px;
+        margin-top: 20px;
+      }
+
+      #related-words-list li {
+        font-size: 40px;
+        margin: 10px 730px 15px;
+        color:rgb(47, 88, 235);
+        background-color: aqua;
+        border: 2px solid coral;
+        border-radius: 12px;
+        box-shadow: .4375rem .625rem cornflowerblue;
+      }
+
+      .related-image {
+        max-width: 100%;
+        max-height: 150px;
+      }
+      .span{
+        font-size: 35px;
+        color: #611ee7c8;
+      }
+      .related-image {
+    max-width: 110%;
+    max-height: 150px;
+    transition: transform 0.3s; /* Transición para el efecto de zoom */
+  }
+
+  .related-image:hover {
+    transform: scale(1.1); /* Aplica un zoom del 110% al pasar el mouse por encima */
+  }
+  h1{
+    background-color:royalblue ;
+  }
+</style>
+    
+    <title>Alfabeto Interactivo</title>
+</head>
+<body>
+  <h1>ALFABERTO INTERACTIVO</h1>
+  <h2>No debe suponerse la existencia de más cosas que las absolutamente necesarias”.</h2>
+  <div id="alphabet-container">
+    <div class="letter" data-letter="Aa">A/a</div>
+    <div class="letter" data-letter="Bb">B/b</div>
+    <div class="letter" data-letter="Cc">C/c</div>
+    <div class="letter" data-letter="Dd">D/d</div>
+    <div class="letter" data-letter="Ee">E/e</div>
+    <div class="letter" data-letter="Ff">F/f</div>
+    <div class="letter" data-letter="Gg">G/g</div>
+    <div class="letter" data-letter="Hh">H/h</div>
+    <div class="letter" data-letter="i">I/i</div>
+    <div class="letter" data-letter="Jj">J/j</div>
+    <div class="letter" data-letter="Kk">K/k</div>
+    <div class="letter" data-letter="Ll">L/l</div>
+    <div style="font-size: 28px;" class="letter" data-letter="LLll">LL/ll </div>
+    <div class="letter" data-letter="Mm">M/m</div>
+    <div class="letter" data-letter="Nn">N/n</div>
+    <div class="letter" data-letter="Ññ">Ñ/ñ</div>
+    <div class="letter" data-letter="Oo">O/o</div>
+    <div class="letter" data-letter="Pp">P/p</div>
+    <div class="letter" data-letter="Qq">Q/q</div>
+    <div class="letter" data-letter="Rr">R/r</div>
+    <div class="letter" data-letter="Ss">S/s</div>
+    <div class="letter" data-letter="Tt">T/t</div>
+    <div class="letter" data-letter="Uu">U/u</div>
+    <div class="letter" data-letter="Ww">W/w</div>
+    <div class="letter" data-letter="Xx">X/x</div>
+    <div class="letter" data-letter="Yy">Y/y</div>
+    <div class="letter" data-letter="Zz">Z/z</div>
+    <!-- Agrega el resto de las letras del alfabeto aquí -->
+  </div>
+  <div id="content-display">
+    <div id="related-words">
+      <span class="span">Palabras relacionadas:</span>
+      <ul id="related-words-list"></ul>
+    </div>
+  </div>
+  <div id="image-container">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+  </div>
+  <script>
+    const content = {
+      Aa: {
+        words: ["ALEX / Alex", "AVION / avión", "ARDILLA / ardilla", "ANDAR / andar", "AGUA / agua"],
+        images: [
+          "img/alex.png",
+          "img/avio.jpeg",
+          "img/ardi.jpeg",
+          "img/anda.jpeg",
+          "img/agua.jpeg",
+        ],
+      },
+      Bb: {
+        words: ["Ballena / ballena", "Bosque / bosque", "Bicicleta  /bicicleta", "Barco / barco", "Biblioteca / biblioteca"],
+        images: [
+          "img/ballena.jpeg",
+          "img/bosq.jpeg",
+          "img/bici.jpeg",
+          "img/barc.jpeg",
+          "img/bibl.jpeg",
+        ],
+      },
+      Cc: {
+        words: ["CARLA / Carla", "CEREZAS / cerezas", "CINE / cine", "COCINA / cocina", "CUNA / cuna"],
+        images: [
+          "img/CARL.jpeg",
+          "img/CERE.jpeg",
+          "img/CINE.jpeg",
+          "img/COCI.jpeg",
+          "img/cuna.jpeg",
+        ],
+      },
+      Dd: {
+        words: ["DADO / dado", "DEDO / dedo", "DINERO / dinero", "DORMIR / dormir", "DUNAS / dunas"],
+        images: [
+          "img/dado.jpeg",
+          "img/dedo.jpeg",
+          "img/dine.jpeg",
+          "img/dorm.jpeg",
+          "img/duna.jpeg",
+        ],
+      },
+      Ee: {
+        words: ["ELEFANTE / elefante", "ESCRIBIR / escribir", "ENERO / enero", "ESTAR / estar", "ELENA / Elena"],
+        images: [
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+      },
+      Ff: {
+        words: ["FLECHA / flecha", "FELIZ / feliz", "FEBRERO / febrero", "ELEGANTE / elegante", "FAMILIA / familia"],
+        images: [
+          "img/agua.jpeg",
+          "",
+          "",
+          "",
+          "",
+        ],
+      },
+      Gg: {
+        words: ["GATO / gata", "GENTE / gente", "GIMNASIO / gimnasia", "GOTA / gota", "GULA / goloso"],
+        images: [
+          "img/agua.jpeg",
+          "",
+          "",
+          "",
+          "",
+        ],
+      },
+      Hh: {
+        words: ["HAMBURGUESA / hamburguesa", "HELADO / helado", "HIJO / hija", "HOJA / hoja", "HUMO / humo"],
+        images: [
+          "img/agua.jpeg",
+          "",
+          "",
+          "",
+          "",
+        ],
+      },
+      i: {
+        words: ["ITALIA / Italia", "IMNO / imno", "INES / Ipolito", ""," ",],
+        images: [
+          "img/ital.jpeg",
+          "",
+          "",
+          "",
+          "",
+        ],
+      },
+      // Agrega el resto de las letras y contenido relacionado aquí
+    };
+
+    const alphabetDivs = document.querySelectorAll(".letter");
+    const relatedWordsDiv = document.getElementById("related-words-list");
+    const relatedImages = document.querySelectorAll(".related-image");
+
+    alphabetDivs.forEach((div) => {
+      div.addEventListener("mouseover", (event) => {
+        const letter = event.target.getAttribute("data-letter");
+        const contentData = content[letter];
+
+        // Quitamos la clase 'active' de todos los divs
+        alphabetDivs.forEach((div) => {
+          div.classList.remove("active");
+        });
+
+        // Añadimos la clase 'active' al div actual
+        div.classList.add("active");
+
+        if (contentData) {
+          relatedWordsDiv.innerHTML = ""; // Limpiamos la lista antes de agregar palabras
+
+          contentData.words.forEach((word) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = word;
+            relatedWordsDiv.appendChild(listItem);
+          });
+
+          // Mostrar imágenes relacionadas
+          contentData.images.forEach((image, i) => {
+            if (i < relatedImages.length) {
+              relatedImages[i].src = image;
+              relatedImages[i].classList.add("show-image"); // Agrega la clase "show-image" a la imagen
+            }
+          });
+
+          // Ocultar imágenes no utilizadas
+          for (let i = contentData.images.length; i < relatedImages.length; i++) {
+            relatedImages[i].src = "";
+            relatedImages[i].classList.remove("show-image"); // Remueve la clase "show-image" si no hay imagen
+          }
+        } else {
+          relatedWordsDiv.innerHTML = "No se encontraron palabras relacionadas.";
+
+          // Ocultar todas las imágenes al retirar el mouse
+          relatedImages.forEach((image) => {
+            image.src = "";
+            image.classList.remove("show-image"); // Remueve la clase "show-image" si no hay imagen
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+No debe suponerse la existencia de más cosas que las absolutamente necesarias”.
