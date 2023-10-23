@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+      body {
+        text-align: center;
+      }
+
+      #alphabet-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .letter {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: .3125rem;
+        font-size: 2rem;
+        transition: background-color 0.3s; /* Agregamos una transición de 0.3 segundos para el color de fondo */
+      }
+
+      .letter.active {
+        background-color: #FFC800; /* Cambiamos el color de fondo cuando está activo */
+      }
+
+      #content-display {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      #related-words-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #related-words-list li {
+        font-size: 25px;
+        margin: 5px 0;
+      }
+
+      .related-image {
+        max-width: 100%;
+        max-height: 150px;
+      }
+      .span{
+        font-size: 30px;
+        color: #FFC800;
+      }
+    </style>
+    <title>Alfabeto Interactivo</title>
+</head>
+<body>
+  <div id="alphabet-container">
+    <div class="letter" data-letter="Aa">Aa</div>
+    <div class="letter" data-letter="Bb">Bb</div>
+    <div class="letter" data-letter="Cc">Cc</div>
+    <div class="letter" data-letter="Dd">Dd</div>
+    <!-- Agrega el resto de las letras del alfabeto aquí -->
+  </div>
+  <div id="content-display">
+    <div id="related-words">
+      <span class="span">Palabras relacionadas:</span>
+      <ul id="related-words-list"></ul>
+    </div>
+  </div>
+  <div id="image-container">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+    <img class="related-image" src="" alt="">
+  </div>
+  <script>
+    const content = {
+      Aa: {
+        words: ["AMERICA America", "AVION avión", "ARDILLA ardilla", "ANDAR andar", "AGUA agua"],
+        images: [
+          "img/amer.jpeg",
+          "img/avio.jpeg",
+          "img/ardi.jpeg",
+          "img/anda.jpeg",
+          "img/agua.jpeg",
+        ],
+      },
+      Bb: {
+        words: ["Ballena ballena", "Bosque bosque", "Bicicleta bicicleta", "Barco barco", "Biblioteca biblioteca"],
+        images: [
+          "img/ballena.jpeg",
+          "img/bosq.jpeg",
+          "img/bici.jpeg",
+          "img/barc.jpeg",
+          "img/bibl.jpeg",
+        ],
+      },
+      Cc: {
+        words: ["CARLA Carla", "CEREZAS cerezas", "CINE cine", "COCINA cocina", "CUNA cuna"],
+        images: [
+          "img/CARL.jpeg",
+          "img/CERE.jpeg",
+          "img/CINE.jpeg",
+          "img/COCI.jpeg",
+          "img/cuna.jpeg",
+        ],
+      },
+      Dd: {
+        words: ["DADO dado", "DEDO dedo", "DINERO dinero", "DORMIR dormir", "DUNAS dunas"],
+        images: [
+          "img/dado.jpeg",
+          "img/dedo.jpeg",
+          "img/dine.jpeg",
+          "img/dorm.jpeg",
+          "img/duna.jpeg",
+        ],
+      },
+      // Agrega el resto de las letras y contenido relacionado aquí
+    };
+
+    const alphabetDivs = document.querySelectorAll(".letter");
+    const relatedWordsDiv = document.getElementById("related-words-list");
+    const relatedImages = document.querySelectorAll(".related-image");
+
+    alphabetDivs.forEach((div) => {
+      div.addEventListener("mouseover", (event) => {
+        const letter = event.target.getAttribute("data-letter");
+        const contentData = content[letter];
+
+        // Quitamos la clase 'active' de todos los divs
+        alphabetDivs.forEach((div) => {
+          div.classList.remove("active");
+        });
+
+        // Añadimos la clase 'active' al div actual
+        div.classList.add("active");
+
+        if (contentData) {
+          relatedWordsDiv.innerHTML = ""; // Limpiamos la lista antes de agregar palabras
+
+          contentData.words.forEach((word) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = word;
+            relatedWordsDiv.appendChild(listItem);
+          });
+
+          // Mostrar imágenes relacionadas
+          contentData.images.forEach((image, i) => {
+            if (i < relatedImages.length) {
+              relatedImages[i].src = image;
+              relatedImages[i].classList.add("show-image"); // Agrega la clase "show-image" a la imagen
+            }
+          });
+
+          // Ocultar imágenes no utilizadas
+          for (let i = contentData.images.length; i < relatedImages.length; i++) {
+            relatedImages[i].src = "";
+            relatedImages[i].classList.remove("show-image"); // Remueve la clase "show-image" si no hay imagen
+          }
+        } else {
+          relatedWordsDiv.innerHTML = "No se encontraron palabras relacionadas.";
+
+          // Ocultar todas las imágenes al retirar el mouse
+          relatedImages.forEach((image) => {
+            image.src = "";
+            image.classList.remove("show-image"); // Remueve la clase "show-image" si no hay imagen
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
